@@ -22,23 +22,23 @@ clean:
 # Install dependencies for all tools
 install:
     @echo "Installing dependencies for all tools..."
-    @find tools -name "package.json" -execdir npm install \;
-    @find scripts -name "package.json" -execdir npm install \;
-    @find experiments -name "package.json" -execdir npm install \;
+    @find tools -name "package.json" -execdir bun install \;
+    @find scripts -name "package.json" -execdir bun install \;
+    @find experiments -name "package.json" -execdir bun install \;
 
 # Build all tools
 build:
     @echo "Building all tools..."
-    @find tools -name "package.json" -execdir npm run build \; 2>/dev/null || true
-    @find scripts -name "package.json" -execdir npm run build \; 2>/dev/null || true
-    @find experiments -name "package.json" -execdir npm run build \; 2>/dev/null || true
+    @find tools -name "package.json" -execdir bun run build \; 2>/dev/null || true
+    @find scripts -name "package.json" -execdir bun run build \; 2>/dev/null || true
+    @find experiments -name "package.json" -execdir bun run build \; 2>/dev/null || true
 
 # Run tests for all tools
 test:
     @echo "Running tests for all tools..."
-    @find tools -name "package.json" -execdir npm test \; 2>/dev/null || true
-    @find scripts -name "package.json" -execdir npm test \; 2>/dev/null || true
-    @find experiments -name "package.json" -execdir npm test \; 2>/dev/null || true
+    @find tools -name "package.json" -execdir bun test \; 2>/dev/null || true
+    @find scripts -name "package.json" -execdir bun test \; 2>/dev/null || true
+    @find experiments -name "package.json" -execdir bun test \; 2>/dev/null || true
 
 # Lint all code
 lint:
@@ -56,10 +56,9 @@ format:
 new-tool name:
     @echo "Creating new tool: {{name}}"
     @mkdir -p tools/{{name}}/src
-    @echo '{"name":"{{name}}","version":"1.0.0","type":"module","scripts":{"build":"tsc","dev":"tsc --watch","start":"node dist/index.js"},"devDependencies":{"typescript":"^5.0.0","@types/node":"^20.0.0"}}' | jq . > tools/{{name}}/package.json
-    @echo '{"compilerOptions":{"target":"ES2022","module":"ES2022","moduleResolution":"node","outDir":"./dist","rootDir":"./src","strict":true,"esModuleInterop":true,"skipLibCheck":true},"include":["src/**/*"],"exclude":["node_modules","dist"]}' | jq . > tools/{{name}}/tsconfig.json
+    @echo '{"name":"{{name}}","version":"1.0.0","type":"module","scripts":{"build":"bun build src/index.ts --outdir dist --target bun","dev":"bun --watch src/index.ts","start":"bun src/index.ts","test":"bun test"},"dependencies":{},"devDependencies":{"bun-types":"latest"}}' | jq . > tools/{{name}}/package.json
     @echo 'console.log("Hello from {{name}}!");' > tools/{{name}}/src/index.ts
-    @echo "# {{name}}\n\nDescription of {{name}} tool.\n\n## Usage\n\n\`\`\`bash\nnpm run build\nnpm start\n\`\`\`" > tools/{{name}}/README.md
+    @echo "# {{name}}\n\nDescription of {{name}} tool.\n\n## Usage\n\n\`\`\`bash\nbun install\nbun start\n\`\`\`" > tools/{{name}}/README.md
     @echo "Created new tool: tools/{{name}}"
 
 # Create a new script template  

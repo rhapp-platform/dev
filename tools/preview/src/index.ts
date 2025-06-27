@@ -118,7 +118,7 @@ async function deployToR2(filePath: string, bucket: string, remotePath: string):
       "rclone", 
       "copy", 
       filePath, 
-      `r2:${bucket}/${remotePath}`,
+      `r2:${bucket}/`,
       "--progress"
     ]);
     
@@ -147,7 +147,7 @@ export async function createPreview(options: PreviewOptions = {}) {
     title = "Development Preview",
     content = "<h2>Welcome to the preview!</h2><p>This is a generated preview page.</p>",
     output = "./preview.html",
-    bucket = "rhapp-dev",
+    bucket = "app-rhapdev",
     topic = "dev-preview",
     url
   } = options;
@@ -210,7 +210,7 @@ if (import.meta.main) {
   const result = await createPreview({
     title,
     content,
-    bucket: "rhapp-dev",
+    bucket: "app-rhapdev",
     topic: "dev-preview"
   });
   

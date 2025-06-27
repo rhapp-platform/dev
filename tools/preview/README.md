@@ -15,14 +15,13 @@ A utility for generating static HTML preview pages, deploying them to Cloudflare
 
 ```bash
 # Basic usage with defaults
-npm start
+bun start
 
 # Custom title and content
-npm start "My Preview" "<h2>Custom content</h2><p>Hello world!</p>"
+bun start "My Preview" "<h2>Custom content</h2><p>Hello world!</p>"
 
-# Or build and run directly
-npm run build
-node dist/index.js "Test Page" "<p>Test content</p>"
+# Or run directly
+bun src/index.ts "Test Page" "<p>Test content</p>"
 ```
 
 ### Programmatic Usage
@@ -44,7 +43,7 @@ console.log(result.deployedUrl);
 
 The tool uses these defaults:
 
-- **Bucket**: `rhapp-dev`
+- **Bucket**: `app-rhapdev`
 - **Topic**: `dev-preview`
 - **Output**: `./dist/preview.html`
 
@@ -103,9 +102,9 @@ npm start "Feature Demo" "
 ## Development
 
 ```bash
-npm install
-npm run dev    # Watch mode
-npm run build  # Build for production
+bun install
+bun dev        # Watch mode
+bun run build  # Build for production
 ```
 
 ## Output
