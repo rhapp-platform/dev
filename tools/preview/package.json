@@ -1,0 +1,31 @@
+{
+  "name": "preview",
+  "version": "1.0.0",
+  "description": "Static HTML preview generator with R2 deployment and ntfy notifications",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "preview": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "ansicolor": "^2.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "preview",
+    "html",
+    "r2",
+    "deployment",
+    "ntfy",
+    "notification"
+  ]
+}
