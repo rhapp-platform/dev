@@ -125,6 +125,9 @@ async function deployToR2(filePath: string, bucket: string, remotePath: string):
     const output = await new Response(rcloneProcess.stdout).text();
     const errorOutput = await new Response(rcloneProcess.stderr).text();
     
+    // Wait for the process to complete
+    await rcloneProcess.exited;
+    
     if (rcloneProcess.exitCode === 0) {
       console.log(lightGreen(`✅ Successfully deployed to R2`));
       const deployedUrl = `https://${bucket}/${remotePath}`;
